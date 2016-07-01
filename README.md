@@ -2,7 +2,7 @@
 
 A simple filterable data table providing reactive internationalization and a proper responsive style using Bootstrap.
 
-![Example](table-example.jpg)
+![Example](table-example.png)
 
 ## Features
 
