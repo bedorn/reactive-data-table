@@ -1,0 +1,68 @@
+<template name="reactiveDataTable">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-solid">
+                <div class="box-header">
+                    {{#if showRowsPerPageFilter}}
+                        {{#if hasMoreThan10Entries}}
+                            <div class="col-md-2 pull-left no-padding">
+                                <select id="clientRowsPerPage" class="form-control">
+                                    <option value="10">10 {{_ "table_entries"}}</option>
+                                    <option value="25">25 {{_ "table_entries"}}</option>
+                                    <option value="50">50 {{_ "table_entries"}}</option>
+                                    <option value="100">100 {{_ "table_entries"}}</option>
+                                </select>
+                            </div>
+                        {{/if}}
+                    {{/if}}
+                    {{#if showSearchFilter}}
+                        <div class="col-md-3 pull-right no-padding">
+                            {{> reactiveTableFilter id="searchFilter" label=searchLabel fields=searchFields}}
+                        </div>
+                    {{/if}}
+                </div>
+                <div class="box-body table-responsive">
+                    {{> reactiveTable settings=settings}}
+                </div>
+                <div class="box-footer">
+                    <div class="col-sm-5 no-padding">
+                        <div class="pull-left">
+                        {{#if hasMoreThan10Entries}}
+                            {{_ "table_showing"}} {{showing}} {{_ "table_to"}} {{to}} {{_ "table_of"}} {{sumEntries}}
+                        {{else}}
+                            {{#if hasMoreThan1Entry}}
+                                {{_ "table_table"}} {{_ "table_has"}} {{sumEntries}} {{_ "table_entries"}}
+                            {{else}}
+                                {{#if hasNoEntries}}
+                                    {{_ "table_table"}} {{_ "table_has"}} {{_ "table_NoEntries"}}
+                                {{else}}
+                                    {{_ "table_table"}} {{_ "table_has"}} {{sumEntries}} {{_ "table_entry"}}
+                                {{/if}}
+                            {{/if}}
+                        {{/if}}
+                        </div>
+                    </div>
+                    {{#if showPagination}}
+                        <div class="col-sm-7 pull-right no-padding">
+                            <div class="pull-right">
+                                <ul class="pagination">
+                                    <li class="paginate_button previous {{#if isPageOneActive}}disabled{{/if}}">
+                                        <a class="previous-page" href="#">{{_ "table_Previous"}}</a>
+                                    </li>
+                                    {{#each pages}}
+                                        <li class="paginate_button {{#if isPageActive this}}active{{/if}}">
+                                            <a class="goToPage" id="{{@index}}" href="#">{{this}}</a>
+                                        </li>
+                                    {{/each}}
+                                    <li class="paginate_button next {{#if isLastPageActive}}disabled{{/if}}">
+                                        <a class="next-page" href="#">{{_ "table_Next"}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
