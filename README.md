@@ -2,6 +2,8 @@
 
 A simple filterable data table providing reactive internationalization and a proper responsive style using Bootstrap.
 
+![Example](table-example.jpg)
+
 ## Features
 
 * Showing data in [Data Tables](https://github.com/aslagle/reactive-table/)
