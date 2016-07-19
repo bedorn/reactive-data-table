@@ -46,6 +46,7 @@ Subscribe a collection and add code below into your template:
 {{> reactiveDataTable
         collection=collection
         tableClass="table table-bordered table-striped table-hover dataTable"
+        tableId="germanPlayersTable"
         fields=fields
         searchFields=searchFields
         showSearchFilter=true
@@ -65,6 +66,8 @@ collection() {
 
 * `tableClass`: Optional value. CSS class for table. Default value is "table table-bordered table-striped table-hover dataTable"
 
+* `tableId`: String value which defines the Id of the table"
+
 * `fields`: Object. Controls the Columns. For reactive translation, you need to add the expressions in brackets into the json translation files. However it is also possible to use a simple String
 
 ```
@@ -75,19 +78,19 @@ fields() {
             label: function() {
                 return TAPi18n.__("tableColumnHeadline_name");
             }
-        }, 
+        },
         {
             key: 'number',
             label: function() {
                 return TAPi18n.__("tableColumnHeadline_number");
             }
-        }, 
+        },
         {
             key: 'position',
             label: function() {
                 return TAPi18n.__("tableColumnHeadline_position");
             }
-        }, 
+        },
         {
             key: 'club',
             label: function() {
