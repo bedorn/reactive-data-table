@@ -124,7 +124,7 @@ searchFields() {
 
 * `showOwnUser`: Optional Bool value which considers the total value of entries if the collection is Meteor.users and the query excludes the own/logged in user. Default is false.
 
-* `searchFilterId`: Optional String value for define the id of the search input field. If there are more than one instances of the reactive-data-table it is better to set the id, as the search input value would affect all table instances.
+* `searchFilterId`: Optional String value for define the id of the search input field. If there are more than one instances of the reactive-data-table set the id, as the search input value would affect all table instances.
 
 ### Style color (pagination button)
 

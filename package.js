@@ -1,6 +1,6 @@
 Package.describe({
     name: 'bedorn:reactive-data-table',
-    version: '1.0.5',
+    version: '1.0.6',
     summary: 'Reactive data table, styled with AdminLTE including pagination, filters and reactive translation',
     documentation: 'README.md',
     git: 'https://github.com/bedorn/reactive-data-table.git'
