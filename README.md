@@ -36,6 +36,8 @@ and copy the follwoing translation into it (ex. english, en.i18n.json):
     "table_table": "Table",
     "table_Previous": "Previous",
     "table_Next": "Next",
+    "table_Last": "Last",
+    "table_First": "First",
     "table_search": "Search"
 }
 ```
@@ -53,6 +55,7 @@ Subscribe a collection and add code below into your template:
         showRowsPerPageFilter=true
         showOwnUser=false
         searchFilterId="germanPlayersSearchFilter"
+        maxPageNumbers=5
 }}
 ```
 
@@ -125,6 +128,8 @@ searchFields() {
 * `showOwnUser`: Optional Bool value which considers the total value of entries if the collection is Meteor.users and the query excludes the own/logged in user. Default is false.
 
 * `searchFilterId`: Optional String value for define the id of the search input field. If there are more than one instances of the reactive-data-table set the id, as the search input value would affect all table instances.
+
+* `maxPageNumbers`: Number how many page buttons are displayed. Optional Number value, minimum is 5, Default is 10. If the maximum of page numbers exceed the param, the two buttons "first" and "last" appear.
 
 ### Style color (pagination button)
 

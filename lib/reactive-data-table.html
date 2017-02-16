@@ -46,17 +46,31 @@
                         <div class="col-sm-7 pull-right no-padding">
                             <div class="pull-right">
                                 <ul class="pagination">
+                                    {{#if hasMoreThanMaxDefPages}}
+                                        <li class="paginate_button first {{#if isPageOneActive}}disabled{{/if}}">
+                                            <a class="first-page" href="#">{{_ "table_First"}}</a>
+                                        </li>
+                                    {{/if}}
+
                                     <li class="paginate_button previous {{#if isPageOneActive}}disabled{{/if}}">
                                         <a class="previous-page" href="#">{{_ "table_Previous"}}</a>
                                     </li>
+
                                     {{#each pages}}
                                         <li class="paginate_button {{#if isPageActive this}}active{{/if}}">
-                                            <a class="goToPage" id="{{@index}}" href="#">{{this}}</a>
+                                            <a class="goToPage" id="{{this}}" href="#">{{this}}</a>
                                         </li>
                                     {{/each}}
+
                                     <li class="paginate_button next {{#if isLastPageActive}}disabled{{/if}}">
                                         <a class="next-page" href="#">{{_ "table_Next"}}</a>
                                     </li>
+
+                                    {{#if hasMoreThanMaxDefPages}}
+                                        <li class="paginate_button last {{#if isLastPageActive}}disabled{{/if}}">
+                                            <a class="last-page" href="#">{{_ "table_Last"}}</a>
+                                        </li>
+                                    {{/if}}
                                 </ul>
                             </div>
                         </div>
