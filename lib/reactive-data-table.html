@@ -21,7 +21,7 @@
                         </div>
                     {{/if}}
                 </div>
-                <div class="box-body table-responsive">
+                <div class="box-body table-responsive {{#if bodyClass}} {{bodyClass}} {{/if}}">
                     {{> reactiveTable settings=settings}}
                 </div>
                 <div class="box-footer">
