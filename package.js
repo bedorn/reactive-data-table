@@ -10,12 +10,11 @@ Package.describe({
 Package.onUse(function(api) {
     api.versionsFrom("1.3.2.4");
 
-    api.use("templating@1.1.12_1", ["client"]);
-    api.use("ecmascript@0.4.6_1");
-    api.use("underscore@1.0.9");
-    api.use("aslagle:reactive-table@0.8.44");
+    api.use("templating@1.3.2", ["client"]);
+    api.use("ecmascript@0.12.4");
+    api.use("underscore@1.0.10");
+    api.use("aslagle:reactive-table@0.8.45");
     api.use("tap:i18n@1.8.2");
-    api.use("yp2:admin-lte@2.3.1");
 
     api.addFiles(
         [

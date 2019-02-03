@@ -1,82 +1,94 @@
 <template name="reactiveDataTable">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box box-solid">
-                <div class="box-header">
-                    {{#if showRowsPerPageFilter}}
-                        {{#if hasMoreThan10Entries}}
-                            <div class="col-md-2 pull-left no-padding">
-                                <select id="clientRowsPerPage" class="form-control">
-                                    <option value="10">10 {{_ "table_entries"}}</option>
-                                    <option value="25">25 {{_ "table_entries"}}</option>
-                                    <option value="50">50 {{_ "table_entries"}}</option>
-                                    <option value="100">100 {{_ "table_entries"}}</option>
-                                </select>
-                            </div>
-                        {{/if}}
-                    {{/if}}
-                    {{#if showSearchFilter}}
-                        <div class="col-md-3 pull-right no-padding">
-                            {{> reactiveTableFilter id=searchFilterId label=searchLabel fields=searchFields}}
-                        </div>
-                    {{/if}}
+
+        <div class="d-flex justify-content-between flex-row mb-3">
+
+            {{#if showSearchFilter}}
+                <div class="col-md-3 pl-0">
+                    {{> reactiveTableFilter id=searchFilterId fields=searchFields class="searchInputField"}}
                 </div>
-                <div class="box-body table-responsive {{#if bodyClass}} {{bodyClass}} {{/if}}">
-                    {{> reactiveTable settings=settings}}
-                </div>
-                <div class="box-footer">
-                    <div class="col-sm-5 no-padding">
-                        <div class="pull-left">
-                        {{#if hasMoreThan10Entries}}
-                            {{_ "table_showing"}} {{showing}} {{_ "table_to"}} {{to}} {{_ "table_of"}} {{sumEntries}}
-                        {{else}}
-                            {{#if hasMoreThan1Entry}}
-                                {{_ "table_table"}} {{_ "table_has"}} {{sumEntries}} {{_ "table_entries"}}
-                            {{else}}
-                                {{#if hasNoEntries}}
-                                    {{_ "table_table"}} {{_ "table_has"}} {{_ "table_NoEntries"}}
-                                {{else}}
-                                    {{_ "table_table"}} {{_ "table_has"}} {{sumEntries}} {{_ "table_entry"}}
-                                {{/if}}
-                            {{/if}}
-                        {{/if}}
-                        </div>
+            {{/if}}
+
+            {{#if showRowsPerPageFilter}}
+                {{#if hasMoreThan10Entries}}
+                    <div >
+                        <select id="clientRowsPerPage" class="form-control">
+                            <option value="10">10 {{_ "table_entries"}}</option>
+                            <option value="25">25 {{_ "table_entries"}}</option>
+                            <option value="50">50 {{_ "table_entries"}}</option>
+                            <option value="100">100 {{_ "table_entries"}}</option>
+                        </select>
                     </div>
-                    {{#if showPagination}}
-                        <div class="col-sm-7 pull-right no-padding">
-                            <div class="pull-right">
-                                <ul class="pagination">
-                                    {{#if hasMoreThanMaxDefPages}}
-                                        <li class="paginate_button first {{#if isPageOneActive}}disabled{{/if}}">
-                                            <a class="first-page" href="#">{{_ "table_First"}}</a>
-                                        </li>
-                                    {{/if}}
+                {{/if}}
+            {{/if}}
 
-                                    <li class="paginate_button previous {{#if isPageOneActive}}disabled{{/if}}">
-                                        <a class="previous-page" href="#">{{_ "table_Previous"}}</a>
-                                    </li>
+        </div>
 
-                                    {{#each pages}}
-                                        <li class="paginate_button {{#if isPageActive this}}active{{/if}}">
-                                            <a class="goToPage" id="{{this}}" href="#">{{this}}</a>
-                                        </li>
-                                    {{/each}}
-
-                                    <li class="paginate_button next {{#if isLastPageActive}}disabled{{/if}}">
-                                        <a class="next-page" href="#">{{_ "table_Next"}}</a>
-                                    </li>
-
-                                    {{#if hasMoreThanMaxDefPages}}
-                                        <li class="paginate_button last {{#if isLastPageActive}}disabled{{/if}}">
-                                            <a class="last-page" href="#">{{_ "table_Last"}}</a>
-                                        </li>
-                                    {{/if}}
-                                </ul>
-                            </div>
-                        </div>
-                    {{/if}}
-                </div>
+        <div class="card mb-2">
+            <div class="card-body {{#if bodyClass}} {{bodyClass}} {{/if}}  p-0">
+                {{#if subsReady}}
+                    {{> reactiveTable settings=settings}}
+                {{else}}
+                    <div class="d-flex align-items-center" style="padding: 10px;">
+                        <strong>{{_ loadingText}}</strong>
+                        <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+                    </div>
+                {{/if}}
             </div>
         </div>
-    </div>
+
+        <div class="d-flex justify-content-between flex-row mb-5">
+
+            <h5>
+                <small>
+                    {{#if hasMoreThan10Entries}}
+                        {{_ "table_showing"}} {{showing}} {{_ "table_to"}} {{to}} {{_ "table_of"}} {{sumEntries}}
+                    {{else}}
+                        {{#if hasMoreThan1Entry}}
+                            {{_ "table_table"}} {{_ "table_has"}} {{sumEntries}} {{_ "table_entries"}}
+                        {{else}}
+                            {{#if hasNoEntries}}
+                                {{_ "table_table"}} {{_ "table_has"}} {{_ "table_NoEntries"}}
+                            {{else}}
+                                {{_ "table_table"}} {{_ "table_has"}} {{sumEntries}} {{_ "table_entry"}}
+                            {{/if}}
+                        {{/if}}
+                    {{/if}}
+                </small>
+            </h5>
+
+            {{#if showPagination}}
+                <div>
+
+                    <ul class="pagination">
+                        {{#if hasMoreThanMaxDefPages}}
+                            <li class="first {{#if isPageOneActive}}disabled{{/if}}">
+                                <a class="btn btn-primary first-page" href="#">{{_ "table_First"}}</a>
+                            </li>
+                        {{/if}}
+
+                        <li class="previous {{#if isPageOneActive}}disabled{{/if}}">
+                            <a class="btn btn-primary previous-page" href="#">{{_ "table_Previous"}}</a>
+                        </li>
+
+                        {{#each pages}}
+                            <li class="{{#if isPageActive this}}active{{/if}}">
+                                <a class="btn btn-primary goToPage" id="{{this}}" href="#">{{this}}</a>
+                            </li>
+                        {{/each}}
+
+                        <li class="next {{#if isLastPageActive}}disabled{{/if}}">
+                            <a class="btn btn-primary next-page" href="#">{{_ "table_Next"}}</a>
+                        </li>
+
+                        {{#if hasMoreThanMaxDefPages}}
+                            <li class="last {{#if isLastPageActive}}disabled{{/if}}">
+                                <a class="btn btn-primary last-page" href="#">{{_ "table_Last"}}</a>
+                            </li>
+                        {{/if}}
+                    </ul>
+
+                </div>
+            {{/if}}
+        </div>
+
 </template>
